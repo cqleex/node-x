@@ -1,722 +1,529 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alex Morgan - 创意设计师作品集</title>
+  <!-- 引入Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入Font Awesome图标 -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- 引入Google字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#6366F1', // 主色调：靛蓝色
+            secondary: '#EC4899', // 辅助色：粉色
+            dark: '#1E293B',
+            light: '#F8FAFC'
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      /* 自定义工具类 */
+      .content-auto {
+        content-visibility: auto;
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .text-gradient {
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(90deg, #6366F1, #EC4899);
+      }
+      .hover-scale {
+        transition: transform 0.3s ease;
+      }
+      .hover-scale:hover {
+        transform: scale(1.03);
+      }
+    }
+  </style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<body class="font-inter bg-gradient-to-br from-dark to-gray-900 text-light min-h-screen">
+  <!-- 导航栏 -->
+  <header id="navbar" class="fixed w-full z-50 transition-all duration-300">
+    <nav class="container mx-auto px-4 py-4 flex justify-between items-center glass">
+      <a href="#" class="text-2xl font-bold text-gradient">Alex<span class="text-white">Morgan</span></a>
+      
+      <!-- 桌面导航 -->
+      <div class="hidden md:flex space-x-8">
+        <a href="#home" class="font-medium hover:text-primary transition-colors">首页</a>
+        <a href="#projects" class="font-medium hover:text-primary transition-colors">项目</a>
+        <a href="#skills" class="font-medium hover:text-primary transition-colors">技能</a>
+        <a href="#about" class="font-medium hover:text-primary transition-colors">关于我</a>
+        <a href="#contact" class="font-medium hover:text-primary transition-colors">联系</a>
+      </div>
+      
+      <!-- 移动端菜单按钮 -->
+      <button id="menu-toggle" class="md:hidden text-2xl">
+        <i class="fa fa-bars"></i>
+      </button>
+    </nav>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="hidden md:hidden glass px-4 py-2">
+      <a href="#home" class="block py-2 hover:text-primary transition-colors">首页</a>
+      <a href="#projects" class="block py-2 hover:text-primary transition-colors">项目</a>
+      <a href="#skills" class="block py-2 hover:text-primary transition-colors">技能</a>
+      <a href="#about" class="block py-2 hover:text-primary transition-colors">关于我</a>
+      <a href="#contact" class="block py-2 hover:text-primary transition-colors">联系</a>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+  <main>
+    <!-- 英雄区 -->
+    <section id="home" class="min-h-screen flex items-center pt-16 relative overflow-hidden">
+      <!-- 背景装饰 -->
+      <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20">
+        <div class="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-primary blur-3xl"></div>
+        <div class="absolute bottom-20 -left-20 w-96 h-96 rounded-full bg-secondary blur-3xl"></div>
+      </div>
+      
+      <div class="container mx-auto px-4 py-16 relative z-10">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="space-y-6">
+            <h1 class="text-[clamp(2.5rem,5vw,4rem)] font-bold leading-tight">
+              创意设计与<br>
+              <span class="text-gradient">前端开发</span>
+            </h1>
+            <p class="text-gray-300 text-lg md:text-xl max-w-lg">
+              专注于打造美观、易用且高性能的数字产品，将创意转化为令人印象深刻的用户体验。
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#projects" class="px-8 py-3 bg-gradient-to-r from-primary to-secondary rounded-full font-medium hover:shadow-lg hover:shadow-primary/20 transition-all">
+                查看作品集
+              </a>
+              <a href="#contact" class="px-8 py-3 glass rounded-full font-medium hover:bg-white/20 transition-all">
+                联系我
+              </a>
+            </div>
+            <div class="flex space-x-6 text-xl">
+              <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fa fa-behance"></i></a>
+              <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fa fa-dribbble"></i></a>
+              <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fa fa-github"></i></a>
+              <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fa fa-linkedin"></i></a>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden glass hover-scale">
+              <img src="https://picsum.photos/id/1005/800/1000" alt="设计师工作照" class="w-full h-full object-cover">
+            </div>
+            <!-- 装饰元素 -->
+            <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-primary/30 rounded-xl -z-10 rotate-12"></div>
+            <div class="absolute -top-6 -right-6 w-32 h-32 bg-secondary/30 rounded-xl -z-10 -rotate-12"></div>
+          </div>
         </div>
+      </div>
+      
+      <!-- 滚动指示 -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <a href="#projects" class="text-gray-400 hover:text-white transition-colors">
+          <i class="fa fa-chevron-down text-2xl"></i>
+        </a>
+      </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+    <!-- 项目展示区 -->
+    <section id="projects" class="py-20 bg-gray-900/50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">精选项目</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">探索我最近完成的一些创意项目，每一个项目都融合了独特的设计理念和技术实现</p>
         </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- 项目卡片1 -->
+          <div class="glass rounded-2xl overflow-hidden hover-scale group">
+            <div class="h-60 overflow-hidden">
+              <img src="https://picsum.photos/id/180/600/400" alt="电子商务网站设计" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="p-6 space-y-4">
+              <h3 class="text-xl font-semibold">电子商务网站设计</h3>
+              <p class="text-gray-400">为时尚品牌打造的现代化电商平台，注重用户体验和转化率优化</p>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-2">
+                  <span class="px-3 py-1 bg-primary/20 text-primary text-sm rounded-full">UI/UX</span>
+                  <span class="px-3 py-1 bg-gray-700 text-gray-300 text-sm rounded-full">React</span>
+                </div>
+                <a href="#" class="text-primary hover:text-secondary transition-colors">
+                  查看详情 <i class="fa fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 项目卡片2 -->
+          <div class="glass rounded-2xl overflow-hidden hover-scale group">
+            <div class="h-60 overflow-hidden">
+              <img src="https://picsum.photos/id/48/600/400" alt="移动应用界面设计" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="p-6 space-y-4">
+              <h3 class="text-xl font-semibold">健康追踪应用</h3>
+              <p class="text-gray-400">帮助用户监控健康数据的移动应用，简洁直观的界面设计和流畅的交互体验</p>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-2">
+                  <span class="px-3 py-1 bg-primary/20 text-primary text-sm rounded-full">UI设计</span>
+                  <span class="px-3 py-1 bg-gray-700 text-gray-300 text-sm rounded-full">Figma</span>
+                </div>
+                <a href="#" class="text-primary hover:text-secondary transition-colors">
+                  查看详情 <i class="fa fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 项目卡片3 -->
+          <div class="glass rounded-2xl overflow-hidden hover-scale group">
+            <div class="h-60 overflow-hidden">
+              <img src="https://picsum.photos/id/26/600/400" alt="企业官网重构" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            </div>
+            <div class="p-6 space-y-4">
+              <h3 class="text-xl font-semibold">企业官网重构</h3>
+              <p class="text-gray-400">为科技公司重构的企业官网，提升品牌形象和用户转化率</p>
+              <div class="flex justify-between items-center">
+                <div class="flex gap-2">
+                  <span class="px-3 py-1 bg-primary/20 text-primary text-sm rounded-full">前端开发</span>
+                  <span class="px-3 py-1 bg-gray-700 text-gray-300 text-sm rounded-full">Tailwind CSS</span>
+                </div>
+                <a href="#" class="text-primary hover:text-secondary transition-colors">
+                  查看详情 <i class="fa fa-arrow-right ml-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="text-center mt-12">
+          <a href="#" class="inline-flex items-center px-6 py-3 glass rounded-full hover:bg-white/20 transition-all">
+            查看更多项目 <i class="fa fa-long-arrow-right ml-2"></i>
+          </a>
+        </div>
+      </div>
     </section>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
+    <!-- 技能展示区 -->
+    <section id="skills" class="py-20 relative overflow-hidden">
+      <!-- 背景装饰 -->
+      <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-primary/10 blur-3xl"></div>
+      
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">我的技能</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">不断学习和提升的技术栈，为项目提供全方位的解决方案</p>
         </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- 技能卡片1 -->
+          <div class="glass rounded-2xl p-6 text-center hover-scale">
+            <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fa fa-code text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">前端开发</h3>
+            <p class="text-gray-400 mb-4">HTML5、CSS3、JavaScript、React、Vue</p>
+            <div class="w-full bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-primary to-secondary h-2 rounded-full" style="width: 90%"></div>
+            </div>
+          </div>
+          
+          <!-- 技能卡片2 -->
+          <div class="glass rounded-2xl p-6 text-center hover-scale">
+            <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fa fa-paint-brush text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">UI/UX设计</h3>
+            <p class="text-gray-400 mb-4">Figma、Adobe XD、Sketch、用户研究</p>
+            <div class="w-full bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-primary to-secondary h-2 rounded-full" style="width: 85%"></div>
+            </div>
+          </div>
+          
+          <!-- 技能卡片3 -->
+          <div class="glass rounded-2xl p-6 text-center hover-scale">
+            <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fa fa-mobile text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">响应式设计</h3>
+            <p class="text-gray-400 mb-4">移动优先、自适应布局、跨设备兼容</p>
+            <div class="w-full bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-primary to-secondary h-2 rounded-full" style="width: 95%"></div>
+            </div>
+          </div>
+          
+          <!-- 技能卡片4 -->
+          <div class="glass rounded-2xl p-6 text-center hover-scale">
+            <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fa fa-line-chart text-primary text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-2">性能优化</h3>
+            <p class="text-gray-400 mb-4">代码分割、懒加载、SEO优化、加载速度</p>
+            <div class="w-full bg-gray-700 rounded-full h-2">
+              <div class="bg-gradient-to-r from-primary to-secondary h-2 rounded-full" style="width: 88%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
+    <!-- 关于我 -->
+    <section id="about" class="py-20 bg-gray-900/50">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div class="relative">
+            <div class="w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden glass hover-scale">
+              <img src="https://picsum.photos/id/1012/600/800" alt="关于我" class="w-full h-full object-cover">
+            </div>
+            <!-- 装饰元素 -->
+            <div class="absolute -top-6 -right-6 w-32 h-32 bg-primary/30 rounded-xl -z-10 rotate-12"></div>
+            <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-secondary/30 rounded-xl -z-10 -rotate-12"></div>
+          </div>
+          
+          <div class="space-y-6">
+            <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold">关于我</h2>
+            <p class="text-gray-300 text-lg">
+              你好！我是Alex Morgan，一名拥有5年经验的创意设计师和前端开发者。我热衷于将创意想法转化为功能完善、视觉精美的数字产品。
+            </p>
+            <p class="text-gray-300">
+              我毕业于设计学院，之后专注于前端开发领域，积累了丰富的项目经验。我擅长将设计与技术完美结合，创造出既美观又实用的用户体验。
+            </p>
+            <p class="text-gray-300">
+              我的工作理念是：细节决定成败，用户体验至上。我始终保持学习新技术和设计趋势的热情，不断提升自己的专业能力。
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#" class="px-6 py-3 bg-gradient-to-r from-primary to-secondary rounded-full font-medium hover:shadow-lg hover:shadow-primary/20 transition-all">
+                下载简历
+              </a>
+              <a href="#contact" class="px-6 py-3 glass rounded-full font-medium hover:bg-white/20 transition-all">
+                联系我
+              </a>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
+    <!-- 联系区 -->
+    <section id="contact" class="py-20 relative overflow-hidden">
+      <!-- 背景装饰 -->
+      <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20">
+        <div class="absolute top-20 right-20 w-96 h-96 rounded-full bg-primary blur-3xl"></div>
+        <div class="absolute bottom-20 left-20 w-96 h-96 rounded-full bg-secondary blur-3xl"></div>
+      </div>
+      
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="text-[clamp(1.8rem,3vw,2.5rem)] font-bold mb-4">联系我</h2>
+          <p class="text-gray-400 max-w-2xl mx-auto">有项目合作、咨询或其他问题？欢迎随时联系我，我会尽快回复你</p>
         </div>
-    </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
+        
+        <div class="max-w-3xl mx-auto">
+          <form class="glass rounded-2xl p-8 space-y-6">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block text-gray-300 mb-2">姓名</label>
+                <input type="text" id="name" class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white" placeholder="你的姓名">
+              </div>
+              <div>
+                <label for="email" class="block text-gray-300 mb-2">邮箱</label>
+                <input type="email" id="email" class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white" placeholder="你的邮箱">
+              </div>
+            </div>
+            <div>
+              <label for="subject" class="block text-gray-300 mb-2">主题</label>
+              <input type="text" id="subject" class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white" placeholder="消息主题">
+            </div>
+            <div>
+              <label for="message" class="block text-gray-300 mb-2">消息</label>
+              <textarea id="message" rows="5" class="w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white" placeholder="请详细描述你的需求..."></textarea>
+            </div>
+            <button type="submit" class="w-full py-3 bg-gradient-to-r from-primary to-secondary rounded-lg font-medium hover:shadow-lg hover:shadow-primary/20 transition-all">
+              发送消息
+            </button>
+          </form>
+          
+          <div class="grid md:grid-cols-3 gap-8 mt-16 text-center">
+            <div class="glass rounded-xl p-6 hover-scale">
+              <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa fa-envelope text-primary text-xl"></i>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">邮箱</h3>
+              <a href="mailto:hello@alexmorgan.com" class="text-gray-400 hover:text-primary transition-colors">hello@alexmorgan.com</a>
+            </div>
             
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
+            <div class="glass rounded-xl p-6 hover-scale">
+              <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa fa-phone text-primary text-xl"></i>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">电话</h3>
+              <a href="tel:+8613800138000" class="text-gray-400 hover:text-primary transition-colors">+86 138 0013 8000</a>
+            </div>
+            
+            <div class="glass rounded-xl p-6 hover-scale">
+              <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa fa-map-marker text-primary text-xl"></i>
+              </div>
+              <h3 class="text-lg font-semibold mb-2">地址</h3>
+              <p class="text-gray-400">上海市浦东新区张江高科技园区</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-gray-900 py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-8">
+        <div>
+          <a href="#" class="text-2xl font-bold text-gradient">Alex<span class="text-white">Morgan</span></a>
+          <p class="text-gray-400 mt-4">创意设计师 & 前端开发者，专注于打造卓越的数字产品体验</p>
+          <div class="flex space-x-4 mt-6">
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fa fa-behance"></i></a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fa fa-dribbble"></i></a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fa fa-github"></i></a>
+            <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fa fa-linkedin"></i></a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">快速链接</h3>
+          <ul class="space-y-2">
+            <li><a href="#home" class="text-gray-400 hover:text-primary transition-colors">首页</a></li>
+            <li><a href="#projects" class="text-gray-400 hover:text-primary transition-colors">项目</a></li>
+            <li><a href="#skills" class="text-gray-400 hover:text-primary transition-colors">技能</a></li>
+            <li><a href="#about" class="text-gray-400 hover:text-primary transition-colors">关于我</a></li>
+            <li><a href="#contact" class="text-gray-400 hover:text-primary transition-colors">联系</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">服务</h3>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">UI/UX设计</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">前端开发</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">响应式网站</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">移动应用设计</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">网站重构</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="text-lg font-semibold mb-4">订阅通讯</h3>
+          <p class="text-gray-400 mb-4">订阅我的通讯，获取最新的设计趋势和技术动态</p>
+          <form class="flex">
+            <input type="email" placeholder="你的邮箱" class="px-4 py-2 bg-gray-800/50 border border-gray-700 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary text-white flex-1">
+            <button type="submit" class="bg-primary hover:bg-primary/90 text-white px-4 rounded-r-lg transition-colors">
+              <i class="fa fa-paper-plane"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <p class="text-gray-500">© 2025 Alex Morgan. 保留所有权利。</p>
+        <div class="flex space-x-6 mt-4 md:mt-0">
+          <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors">隐私政策</a>
+          <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors">服务条款</a>
+          <a href="#" class="text-gray-500 hover:text-gray-300 transition-colors">Cookie 政策</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-gray-900/90', 'shadow-lg');
+        navbar.classList.remove('bg-transparent');
+      } else {
+        navbar.classList.remove('bg-gray-900/90', 'shadow-lg');
+        navbar.classList.add('bg-transparent');
+      }
+    });
+    
+    // 移动端菜单切换
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      const icon = menuToggle.querySelector('i');
+      if (icon.classList.contains('fa-bars')) {
+        icon.classList.replace('fa-bars', 'fa-times');
+      } else {
+        icon.classList.replace('fa-times', 'fa-bars');
+      }
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        // 关闭移动端菜单
+        if (!mobileMenu.classList.contains('hidden')) {
+          mobileMenu.classList.add('hidden');
+          const icon = menuToggle.querySelector('i');
+          icon.classList.replace('fa-times', 'fa-bars');
         }
-
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // 表单提交处理
+    const contactForm = document.querySelector('form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // 这里可以添加表单验证和提交逻辑
+        alert('消息发送成功！我会尽快回复你。');
+        this.reset();
+      });
+    }
+    
+    // 图片加载动画
+    document.addEventListener('DOMContentLoaded', () => {
+      const images = document.querySelectorAll('img');
+      images.forEach(img => {
+        img.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+        img.onload = function() {
+          this.classList.remove('opacity-0');
+          this.classList.add('opacity-100');
+        }
+        // 触发加载
+        if (img.complete) {
+          img.onload();
+        }
+      });
+    });
+  </script>
 </body>
-
 </html>
